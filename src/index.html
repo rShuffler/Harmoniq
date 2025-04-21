@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoniq</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Harmoniq</h1>
+    </header>
+    <main>
+        <button id="importSong">Import Song</button>
+        <ul id="songList"></ul>
+    </main>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="hidden">The song has been removed!</div>
+    
+    <nav class="bottom-nav">
+        <a href="index.html" class="active">🎵 Player</a>
+        <a href="news.html">📰 News</a>
+        <a href="settings.html">⚙️ Settings</a>
+    </nav>
+
+    <script>
+        const { ipcRenderer } = require("electron");
+
+        document.addEventListener("DOMContentLoaded", loadSongs);
+
+        document.getElementById("importSong").addEventListener("click", async () => {
+            const filePath = await ipcRenderer.invoke("open-file-dialog");
+
+            if (filePath) {
+                const fileName = filePath.split(/[\\/]/).pop();
+                addSongToUI(fileName, filePath);
+                saveSong(fileName, filePath);
+            }
+        });
+
+        function addSongToUI(name, path) {
+            const songList = document.getElementById("songList");
+
+            const listItem = document.createElement("li");
+            listItem.className = "song-container";
+            listItem.innerHTML = `
+                <button class="delete-button">🗑️</button>
+                <span>${name}</span>
+                <button class="play-button">▶️ Play</button>
+            `;
+
+            songList.appendChild(listItem);
+
+            const audioPlayer = new Audio(path);
+            listItem.querySelector(".play-button").addEventListener("click", () => {
+                audioPlayer.play();
+            });
+
+            listItem.querySelector(".delete-button").addEventListener("click", () => {
+                listItem.remove();
+                removeSong(name);
+                showNotification();
+            });
+        }
+
+        function saveSong(name, path) {
+            let songs = JSON.parse(localStorage.getItem("songs")) || [];
+            songs.push({ name, path });
+            localStorage.setItem("songs", JSON.stringify(songs));
+        }
+
+        function loadSongs() {
+            let songs = JSON.parse(localStorage.getItem("songs")) || [];
+            songs.forEach(song => addSongToUI(song.name, song.path));
+        }
+
+        function removeSong(name) {
+            let songs = JSON.parse(localStorage.getItem("songs")) || [];
+            songs = songs.filter(song => song.name !== name);
+            localStorage.setItem("songs", JSON.stringify(songs));
+        }
+
+        function showNotification() {
+            const notification = document.getElementById("notification");
+            notification.classList.remove("hidden");
+            setTimeout(() => {
+                notification.classList.add("hidden");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
