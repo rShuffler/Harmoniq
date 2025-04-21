@@ -1,0 +1,203 @@
+/* Font: SF Pro */
+@font-face {
+    font-family: "SF Pro";
+    src: url("../assets/fonts/SF-Pro-Display.OTF") format("opentype");
+}
+
+/* General styles */
+body {
+    font-family: "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+/* Main content */
+main {
+    padding: 20px;
+}
+
+/* Buttons */
+button {
+    background: #007aff;
+    color: white;
+    font-size: 16px;
+    font-family: "SF Pro";
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #005ecb;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    font-family: "SF Pro";
+    font-weight: 500;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+.bottom-nav a.active {
+    font-weight: bold;
+    color: #007aff;
+}
+
+.song-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    margin: 8px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.play-button {
+    background: #007aff;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.play-button:hover {
+    background: #005ecb;
+}
+
+.delete-button {
+    background: #ff3b30;
+    color: white;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delete-button:hover {
+    background: #d9362d;
+}
+
+/* Notification Popup */
+#notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Center news text */
+.news-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+/* Date */
+.news-date {
+    font-size: 14px;
+    color: #888;
+    font-weight: 500;
+}
+
+/* Headline */
+.news-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Description */
+.news-description {
+    font-size: 16px;
+    color: #555;
+    margin-top: 8px;
+}
+
+.settings-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px auto;
+}
+
+.tab-btn {
+    background: #007aff;
+    color: white;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tab-btn.active {
+    background: #005ecb;
+}
+
+.settings-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.settings-panel {
+    display: none;
+}
+
+.settings-panel.active {
+    display: block;
+}
